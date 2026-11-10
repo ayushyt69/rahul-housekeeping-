@@ -17,7 +17,7 @@
 
   if (grid && galleryToggle && images.length > previewCount) {
     galleryToggle.querySelector("span").textContent = "↓";
-    galleryToggle.firstChild.textContent = `View all ${images.length} product photos `;
+    galleryToggle.firstChild.textContent = "View all photos ";
     galleryToggle.addEventListener("click", () => {
       const expanded = galleryToggle.getAttribute("aria-expanded") === "true";
       const cards = [...grid.querySelectorAll(".product-card")];
