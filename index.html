@@ -68,6 +68,11 @@
         </div>
 
         <div class="hero-visual" aria-label="Illustrative household and cleaning supplies">
+          <button class="offers-ribbon" id="offers-open" type="button">
+            <span class="offers-ribbon-dot" aria-hidden="true"></span>
+            View Live Offers
+            <span class="offers-ribbon-arrow" aria-hidden="true">↗</span>
+          </button>
           <div class="hero-image-main"></div>
           <div class="hero-image-small"></div>
         </div>
@@ -178,6 +183,16 @@
       </div>
     </section>
   </main>
+
+  <div class="offers-modal" id="offers-modal" hidden>
+    <div class="offers-dialog" role="dialog" aria-modal="true" aria-labelledby="offers-title">
+      <button class="offers-close" id="offers-close" type="button" aria-label="Close offers">×</button>
+      <span class="eyebrow">RAHUL HOUSEKEEPING</span>
+      <h2 id="offers-title">Current Offers</h2>
+      <p class="offers-empty" id="offers-empty">No offers available right now.</p>
+      <img class="offers-banner" id="offers-banner" alt="Current offer from Rahul Housekeeping" hidden>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-main">
