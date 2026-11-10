@@ -6,10 +6,66 @@
   if (grid) {
     grid.innerHTML = images.map((src, index) => `
       <article class="product-card">
-        <div class="product-image">
+        <button class="product-image product-image-open" type="button" data-image-index="${index}" aria-label="View product photograph ${index + 1} in full size">
           <img src="${src}" alt="Rahul Housekeeping product ${index + 1}" loading="lazy">
-        </div>
+        </button>
       </article>`).join("");
+  }
+
+  // Full-size, scrollable product photo viewer
+  if (grid && images.length) {
+    const viewer = document.createElement("div");
+    viewer.className = "photo-viewer";
+    viewer.hidden = true;
+    viewer.setAttribute("role", "dialog");
+    viewer.setAttribute("aria-modal", "true");
+    viewer.setAttribute("aria-label", "Product photograph viewer");
+    viewer.innerHTML = `
+      <button class="photo-viewer-close" type="button" aria-label="Close image viewer">×</button>
+      <button class="photo-viewer-nav photo-viewer-prev" type="button" aria-label="Previous photograph">‹</button>
+      <div class="photo-viewer-content"><img class="photo-viewer-image" alt="Full-size product photograph"></div>
+      <button class="photo-viewer-nav photo-viewer-next" type="button" aria-label="Next photograph">›</button>
+      <p class="photo-viewer-count" aria-live="polite"></p>`;
+    document.body.appendChild(viewer);
+
+    const fullImage = viewer.querySelector(".photo-viewer-image");
+    const count = viewer.querySelector(".photo-viewer-count");
+    let currentIndex = 0;
+    let previousFocus = null;
+
+    function showPhoto(index) {
+      currentIndex = (index + images.length) % images.length;
+      fullImage.src = images[currentIndex];
+      fullImage.alt = `Rahul Housekeeping product photograph ${currentIndex + 1}`;
+      count.textContent = `${currentIndex + 1} / ${images.length}`;
+      viewer.querySelector(".photo-viewer-prev").hidden = images.length < 2;
+      viewer.querySelector(".photo-viewer-next").hidden = images.length < 2;
+      viewer.querySelector(".photo-viewer-content").scrollTop = 0;
+    }
+    function closeViewer() {
+      viewer.hidden = true;
+      document.body.classList.remove("photo-viewer-open");
+      previousFocus?.focus();
+    }
+    grid.addEventListener("click", event => {
+      const trigger = event.target.closest("[data-image-index]");
+      if (!trigger) return;
+      previousFocus = trigger;
+      showPhoto(Number(trigger.dataset.imageIndex));
+      viewer.hidden = false;
+      document.body.classList.add("photo-viewer-open");
+      viewer.querySelector(".photo-viewer-close").focus();
+    });
+    viewer.querySelector(".photo-viewer-close").addEventListener("click", closeViewer);
+    viewer.querySelector(".photo-viewer-prev").addEventListener("click", () => showPhoto(currentIndex - 1));
+    viewer.querySelector(".photo-viewer-next").addEventListener("click", () => showPhoto(currentIndex + 1));
+    viewer.addEventListener("click", event => { if (event.target === viewer) closeViewer(); });
+    document.addEventListener("keydown", event => {
+      if (viewer.hidden) return;
+      if (event.key === "Escape") closeViewer();
+      if (event.key === "ArrowLeft") showPhoto(currentIndex - 1);
+      if (event.key === "ArrowRight") showPhoto(currentIndex + 1);
+    });
   }
 
   const menuToggle = document.querySelector(".menu-toggle");
