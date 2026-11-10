@@ -1,9 +1,32 @@
 (async () => {
   "use strict";
-  const categoryNames={cleaning:"Cleaning & Housekeeping",plastic:"Plastic Household Items",storage:"Storage & Organisation",furniture:"Chairs & Furniture",kitchen:"Kitchen & Dining",bathroom:"Bathroom Accessories",other:"Other Household Products"};
-  // The current image folder has no category metadata. Keep all existing uploads
-  // visible in All Products until their categories are confirmed.
-  const categoryFiles={cleaning:[],plastic:[],storage:[],furniture:[],kitchen:[],bathroom:[],other:[]};
+  const categories={
+    cleaning:{name:"Cleaning & Housekeeping",folder:"cleaning-housekeeping"},
+    plastic:{name:"Plastic Household Items",folder:"plastic-household-items"},
+    storage:{name:"Storage & Organisation",folder:"storage-organisation"},
+    furniture:{name:"Chairs & Furniture",folder:"chairs-furniture"},
+    kitchen:{name:"Kitchen & Dining",folder:"kitchen-dining"},
+    bathroom:{name:"Bathroom Accessories",folder:"bathroom-accessories"},
+    other:{name:"Other Household Products",folder:"other-household-products"}
+  };
+  async function getFolderImages(path){
+    try{
+      const response=await fetch("https://api.github.com/repos/ayushyt69/rahul-housekeeping-/contents/"+path+"?ref=main",{headers:{Accept:"application/vnd.github+json"},cache:"no-store"});
+      if(!response.ok)throw new Error("Product photo folder unavailable: "+path);
+      const files=await response.json();
+      return files.filter(file=>file.type==="file"&&/\\.(jpe?g|png|webp|gif)$/i.test(file.name))
+        .sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:"base"}))
+        .map(file=>({name:file.name,src:file.download_url,path}));
+    }catch(error){console.warn("Could not load product photos from "+path,error);return [];}
+  }
+  const categoryImages={};
+  await Promise.all(Object.entries(categories).map(async([key,category])=>{
+    categoryImages[key]=await getFolderImages("product-images/"+category.folder);
+  }));
+  // Keep the original root-level photos available in All Products while new uploads
+  // are automatically grouped by the category folder they are placed in.
+  const rootImages=await getFolderImages("product-images");
+  const allImages=[...rootImages,...Object.values(categoryImages).flat()];
   const grid=document.getElementById("catalogue-grid"),empty=document.getElementById("catalogue-empty");
   const title=document.getElementById("catalogue-current-title"),count=document.getElementById("catalogue-count");
   const buttons=[...document.querySelectorAll("[data-category]")];
@@ -19,8 +42,8 @@
   }
   const allImages=await getImages();let visibleImages=[];
   function render(category){
-    const selected=category==="all"?allImages:allImages.filter(image=>categoryFiles[category]?.includes(image.name));
-    visibleImages=selected;title.textContent=category==="all"?"All Products":categoryNames[category];
+    const selected=category==="all"?allImages:(categoryImages[category]||[]);
+    visibleImages=selected;title.textContent=category==="all"?"All Products":categories[category].name;
     count.textContent=selected.length?selected.length+" photos":"";
     grid.innerHTML=selected.map((image,index)=>'<article class="catalogue-product-card"><button class="catalogue-product-open" type="button" data-image-index="'+index+'" aria-label="Open product photo '+(index+1)+'"><img src="'+image.src+'" alt="Rahul Housekeeping product photograph '+(index+1)+'" loading="lazy"></button></article>').join("");
     empty.hidden=selected.length>0;
