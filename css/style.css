@@ -376,7 +376,15 @@ body.photo-viewer-open { overflow: hidden; }
 
 
 /* Live offers ribbon and offer banner modal */
-.hero-visual { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+.hero-visual {
+  display: flex; flex-direction: column; align-items: stretch; gap: 12px;
+  aspect-ratio: auto; min-height: 0;
+}
+.hero-visual .offers-ribbon { position: relative; z-index: 2; flex: 0 0 auto; }
+.hero-visual .hero-image-main {
+  position: relative; inset: auto; z-index: 1; display: block;
+  width: 100%; height: auto; aspect-ratio: 16 / 9;
+}
 .offers-ribbon {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 44px; padding: 0 18px; border: 1px solid #e7b94f; border-radius: 7px;
