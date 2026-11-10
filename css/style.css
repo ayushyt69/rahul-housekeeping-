@@ -373,3 +373,45 @@ body.photo-viewer-open { overflow: hidden; }
   .product-gallery-controls { margin-top: 19px; }
   .gallery-toggle { width: 100%; }
 }
+
+
+/* Live offers ribbon and offer banner modal */
+.hero-visual { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+.offers-ribbon {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 44px; padding: 0 18px; border: 1px solid #e7b94f; border-radius: 7px;
+  color: #172f4b; background: linear-gradient(100deg, #ffe8a6, #ffd36b);
+  box-shadow: 0 8px 20px rgba(17,52,87,.10); font: 800 12px "Manrope", sans-serif;
+  letter-spacing: .045em; text-transform: uppercase; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.offers-ribbon:hover { transform: translateY(-2px); box-shadow: 0 11px 24px rgba(17,52,87,.15); }
+.offers-ribbon-dot { width: 8px; height: 8px; border-radius: 50%; background: #16865c; box-shadow: 0 0 0 4px rgba(22,134,92,.13); }
+.offers-ribbon-arrow { margin-left: 2px; font-size: 16px; }
+.offers-modal[hidden], .offers-banner[hidden] { display: none !important; }
+.offers-modal {
+  position: fixed; inset: 0; z-index: 1100; display: grid; place-items: center;
+  padding: 20px; background: rgba(5,15,28,.78); backdrop-filter: blur(5px);
+}
+.offers-dialog {
+  position: relative; width: min(100%, 760px); max-height: min(90vh, 900px); overflow: auto;
+  padding: 30px; border: 1px solid #e1e8ef; border-radius: 12px; background: #fff;
+  box-shadow: 0 25px 80px rgba(0,0,0,.28);
+}
+.offers-dialog h2 { margin: 8px 48px 18px 0; color: var(--navy); font: 800 clamp(25px,4vw,34px)/1.15 "Manrope",sans-serif; }
+.offers-close {
+  position: absolute; top: 17px; right: 17px; display: grid; place-items: center;
+  width: 40px; height: 40px; border: 1px solid #dbe4ed; border-radius: 50%;
+  color: var(--navy); background: #f7f9fb; font-size: 27px; cursor: pointer;
+}
+.offers-empty { margin: 0; padding: 42px 18px; border: 1px dashed #cbd9e7; border-radius: 8px; color: #64758a; background: #f8fafc; text-align: center; font-size: 14px; }
+.offers-banner { display: block; width: 100%; height: auto; max-height: 68vh; object-fit: contain; border-radius: 7px; background: #f4f6f8; }
+body.offers-open { overflow: hidden; }
+@media (max-width: 760px) {
+  .hero-visual { gap: 10px; }
+  .offers-ribbon { width: 100%; min-height: 42px; }
+  .offers-dialog { padding: 24px 17px 18px; }
+  .offers-close { top: 12px; right: 12px; width: 36px; height: 36px; }
+  .offers-dialog h2 { margin-right: 42px; }
+  .offers-banner { max-height: 72vh; }
+}
