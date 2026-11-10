@@ -139,22 +139,19 @@ img { max-width: 100%; }
 .about-points { display: grid; gap: 10px; margin: 22px 0 25px; color: #40566d; font-size: 12px; font-weight: 700; }
 .about-points span { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-right: 7px; border-radius: 50%; color: #fff; background: #3b9b79; font-size: 10px; }
 
-.reviews-section { padding-top: 65px; padding-bottom: 70px; background: #f5f8fb; }
-.reviews-panel { display: grid; grid-template-columns: 1.1fr .9fr; min-height: 270px; overflow: hidden; border-radius: 10px; color: #fff; background: var(--navy); }
-.reviews-copy { padding: 48px 55px; }
+.business-section { padding-top: 70px; padding-bottom: 78px; background: #f5f8fb; }
+.business-panel { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 12px; color: #fff; background: var(--navy); box-shadow: var(--shadow); }
+.business-copy { padding: 52px 48px; background: linear-gradient(145deg, #123d70, #174f88); }
+.business-copy h2 { max-width: 490px; margin: 14px 0 16px; font: 800 clamp(30px, 3.2vw, 42px)/1.15 "Manrope", sans-serif; letter-spacing: -.045em; }
+.business-copy h2 span { color: #a9ccec; }
+.business-copy p { max-width: 480px; margin: 0 0 26px; color: #d0dfed; font-size: 14px; line-height: 1.85; }
+.business-benefits { display: flex; flex-direction: column; justify-content: center; padding: 35px 42px; background: #174879; }
+.business-benefit { display: flex; align-items: flex-start; gap: 17px; padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+.business-number { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; color: #b9d8f2; font-size: 11px; font-weight: 800; }
+.business-benefit h3 { margin: 0 0 4px; color: #fff; font: 800 15px "Manrope", sans-serif; }
+.business-benefit p { margin: 0; color: #c3d5e7; font-size: 12px; line-height: 1.7; }
+.business-note { margin: 18px 0 0; color: #b9cde0; font-size: 11px; line-height: 1.6; }
 .eyebrow-light { color: #a9ccec; }
-.reviews-copy h2 { margin: 10px 0; font: 800 34px "Manrope", sans-serif; letter-spacing: -.04em; }
-.reviews-copy p { max-width: 410px; margin: 0 0 23px; color: #c0d2e4; font-size: 13px; }
-.reviews-visual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; color: var(--navy); background: #e9f2fa; }
-.reviews-visual::before, .reviews-visual::after { content: ""; position: absolute; width: 230px; height: 230px; border: 1px solid rgba(29,91,155,.15); border-radius: 50%; }
-.reviews-visual::after { width: 310px; height: 310px; }
-.review-quote { height: 47px; color: var(--blue-2); font: 800 78px/1 Georgia, serif; }
-.review-stars { margin: 4px 0 12px; color: #e69b35; letter-spacing: .18em; }
-.reviews-visual strong, .reviews-visual span, .review-google { position: relative; z-index: 1; }
-.reviews-visual strong { font: 800 16px "Manrope", sans-serif; }
-.reviews-visual span { margin-top: 5px; color: #71859a; font-size: 11px; }
-.review-google { margin-top: 20px; font: 800 18px "Manrope", sans-serif; letter-spacing: -.04em; }
-.reviews-section .image-note { text-align: center; }
 
 .visit-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 75px; }
 .visit-copy h2 { margin-bottom: 14px; }
@@ -250,11 +247,11 @@ img { max-width: 100%; }
   .about-visual { min-height: 330px; }
   .about-photo { inset: 0 28px 20px 0; }
   .about-note { bottom: 33px; }
-  .reviews-section { padding-top: 50px; padding-bottom: 55px; }
-  .reviews-panel { grid-template-columns: 1fr; }
-  .reviews-copy { padding: 34px 25px; }
-  .reviews-copy h2 { font-size: 29px; }
-  .reviews-visual { min-height: 215px; }
+  .business-section { padding-top: 50px; padding-bottom: 55px; }
+  .business-panel { grid-template-columns: 1fr; }
+  .business-copy { padding: 36px 26px; }
+  .business-copy h2 { font-size: 30px; }
+  .business-benefits { padding: 20px 26px 28px; }
   .map-card { min-height: 300px; }
   .contact-band { padding: 35px 0; }
   .contact-band-inner { align-items: flex-start; flex-direction: column; }
