@@ -127,7 +127,7 @@ img { max-width: 100%; }
 
 .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 85px; }
 .about-visual { min-height: 420px; position: relative; }
-.about-photo { position: absolute; inset: 0 35px 25px 0; border-radius: 8px 90px 8px 8px; background: url("https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1000&q=85") center/cover; }
+.about-photo { position: absolute; inset: 0 35px 25px 0; border-radius: 8px 90px 8px 8px; background: url("../assets/rahul-owner.jpg") center 35%/cover; }
 .about-visual::before { content: ""; position: absolute; width: 130px; height: 130px; right: 0; bottom: 0; border: 12px solid #eaf3fc; border-radius: 50%; }
 .about-note { position: absolute; right: 0; bottom: 42px; display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 7px; background: #fff; box-shadow: var(--shadow); }
 .about-note-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: #fff; background: var(--blue); font: 800 11px "Manrope", sans-serif; }
