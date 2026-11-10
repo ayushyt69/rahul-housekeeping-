@@ -1,15 +1,18 @@
-/*
-  PRODUCT DATA
-  Add verified products here after reviewing Rahul's actual shop photographs.
-  Do not invent stock, prices, product variants or availability.
-  Product image paths should be relative, e.g. "assets/products/bucket.jpg".
-*/
+/* Product photographs loaded from the product-images folder. */
 window.RAHUL_PRODUCTS = [
-  // Example structure (remove the comment markers only after confirming the product):
-  // {
-  //   name: "Product name",
-  //   category: "Plastic Household Products",
-  //   description: "Short, factual description.",
-  //   image: "assets/products/product-name.jpg"
-  // }
+  "product-images/Screenshot 2026-11-10 140643.png",
+  "product-images/Screenshot 2026-11-10 140647.png",
+  "product-images/Screenshot 2026-11-10 140650.png",
+  "product-images/Screenshot 2026-11-10 140654.png",
+  "product-images/Screenshot 2026-11-10 140657.png",
+  "product-images/Screenshot 2026-11-10 140700.png",
+  "product-images/Screenshot 2026-11-10 140704.png",
+  "product-images/Screenshot 2026-11-10 140708.png",
+  "product-images/Screenshot 2026-11-10 140714.png",
+  "product-images/Screenshot 2026-11-10 140718.png",
+  "product-images/Screenshot 2026-11-10 140723.png",
+  "product-images/Screenshot 2026-11-10 140730.png",
+  "product-images/Screenshot 2026-11-10 140735.png",
+  "product-images/Screenshot 2026-11-10 140740.png",
+  "product-images/Screenshot 2026-11-10 140744.png"
 ];
