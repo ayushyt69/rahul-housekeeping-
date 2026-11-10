@@ -317,3 +317,8 @@ body.photo-viewer-open { overflow: hidden; }
   .photo-viewer-next { right: 14px; }
   .photo-viewer-count { bottom: 20px; }
 }
+
+
+/* Keep the contact phone number useful without another CTA button. */
+.contact-phone-link { display: inline-flex; align-items: center; color: #fff; font-size: 19px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
+.contact-phone-link:hover { color: #e2effb; }
