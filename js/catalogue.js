@@ -25,7 +25,7 @@
       .filter(entry => {
         if (entry.type !== "blob" || !entry.path.startsWith("product-images/")) return false;
         const name = entry.path.toLowerCase();
-        return /\\.(jpg|jpeg|png|webp|gif)$/.test(name);
+        return /\.(jpg|jpeg|png|webp|gif)$/.test(name);
       })
       .map(entry => ({
         name: entry.path.split("/").pop(),
