@@ -321,43 +321,26 @@ body.photo-viewer-open { overflow: hidden; }
 .contact-phone-link:hover { color: #e2effb; }
 
 
-/* Developer credit: clear hierarchy with a restrained animated entrance. */
+/* Developer credit: one consistent style with a subtle golden glow. */
 .footer-bottom .developer-credit {
   grid-column: 2;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: center;
-  gap: 7px;
+  display: inline-block;
+  color: #fff1bd;
+  font: 600 10px/1.5 "Manrope", sans-serif;
+  letter-spacing: .035em;
   white-space: nowrap;
   text-align: center;
+  animation: developer-credit-glow 3s ease-in-out infinite;
 }
-.developer-credit-label {
-  color: #9eb1c5;
-  font-size: 10px;
-  letter-spacing: .035em;
-}
-.footer-bottom .developer-credit-name {
-  display: inline-block;
-  color: #fff;
-  font: 800 15px/1 "Manrope", sans-serif;
-  letter-spacing: .12em;
-}
-.developer-credit-dot { color: #66b5ff; }
-.footer-bottom .developer-credit.is-visible .developer-credit-name {
-  animation: developer-credit-reveal .8s cubic-bezier(.2,.75,.25,1) both;
-}
-@keyframes developer-credit-reveal {
-  from { opacity: 0; transform: translateY(12px); letter-spacing: .24em; text-shadow: 0 0 0 rgba(91,169,238,0); }
-  to { opacity: 1; transform: translateY(0); letter-spacing: .13em; text-shadow: 0 0 18px rgba(91,169,238,.32); }
+@keyframes developer-credit-glow {
+  0%, 100% { text-shadow: 0 0 2px rgba(255, 211, 105, .12), 0 0 5px rgba(255, 190, 70, .08); }
+  50% { text-shadow: 0 0 5px rgba(255, 221, 140, .65), 0 0 13px rgba(255, 190, 70, .42); }
 }
 @media (max-width: 600px) {
   .footer-bottom { display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .footer-bottom .developer-credit { align-items: baseline; text-align: center; }
-  .footer-bottom .developer-credit-name { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .footer-bottom .developer-credit.is-visible .developer-credit-name { animation: none; }
+  .footer-bottom .developer-credit { animation: none; text-shadow: 0 0 7px rgba(255, 211, 105, .28); }
 }
 
 
