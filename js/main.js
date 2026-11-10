@@ -26,7 +26,7 @@
       if (!response.ok) throw new Error("GitHub image listing unavailable");
       const files = await response.json();
       const discovered = files
-        .filter(file => file.type === "file" && /\\.(jpe?g|png|webp|gif)$/i.test(file.name))
+        .filter(file => file.type === "file" && /\.(jpe?g|png|webp|gif)$/i.test(file.name))
         .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
         .map(file => file.download_url)
         .filter(Boolean);
@@ -158,7 +158,7 @@
       if (!response.ok) throw new Error("Offers folder could not be checked");
       const files = await response.json();
       const offerImages = files
-        .filter(file => file.type === "file" && /\\.(jpe?g|png|webp|gif)$/i.test(file.name))
+        .filter(file => file.type === "file" && /\.(jpe?g|png|webp|gif)$/i.test(file.name))
         .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
       if (!offerImages.length) return;
       offersBanner.src = offerImages[0].download_url;
