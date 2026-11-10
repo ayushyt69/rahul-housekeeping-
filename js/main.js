@@ -1,6 +1,50 @@
-(() => {
+(async () => {
   "use strict";
-  const images = Array.isArray(window.RAHUL_PRODUCTS) ? window.RAHUL_PRODUCTS : [];
+
+  // Discover product photos directly from the GitHub folder.
+  // Keep the local list as a fallback if the GitHub API is temporarily unavailable.
+  async function getProductImages() {
+    const fallback = Array.isArray(window.RAHUL_PRODUCTS) ? window.RAHUL_PRODUCTS : [];
+    const cacheKey = "rahul-housekeeping-product-images-v1";
+    const cacheTimeKey = cacheKey + "-time";
+    const cacheDuration = 5 * 60 * 1000;
+
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      const cachedAt = Number(sessionStorage.getItem(cacheTimeKey) || 0);
+      if (cached && Date.now() - cachedAt < cacheDuration) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      }
+    } catch (_) {}
+
+    try {
+      const response = await fetch(
+        "https://api.github.com/repos/ayushyt69/rahul-housekeeping-/contents/product-images?ref=main",
+        { headers: { Accept: "application/vnd.github+json" } }
+      );
+      if (!response.ok) throw new Error("GitHub image listing unavailable");
+      const files = await response.json();
+      const discovered = files
+        .filter(file => file.type === "file" && /\\.(jpe?g|png|webp|gif)$/i.test(file.name))
+        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
+        .map(file => file.download_url)
+        .filter(Boolean);
+
+      if (discovered.length) {
+        try {
+          sessionStorage.setItem(cacheKey, JSON.stringify(discovered));
+          sessionStorage.setItem(cacheTimeKey, String(Date.now()));
+        } catch (_) {}
+        return discovered;
+      }
+    } catch (error) {
+      console.warn("Could not refresh product photos from GitHub; using saved list.", error);
+    }
+    return fallback;
+  }
+
+  const images = await getProductImages();
   const grid = document.getElementById("product-grid");
 
   const previewCount = 4;
@@ -29,7 +73,7 @@
         }
       });
       galleryToggle.setAttribute("aria-expanded", String(!expanded));
-      galleryToggle.firstChild.textContent = expanded ? `View all ${images.length} product photos ` : "Show fewer photos ";
+      galleryToggle.firstChild.textContent = expanded ? "View all photos " : "Show fewer photos ";
       galleryToggle.querySelector("span").textContent = expanded ? "↓" : "↑";
       if (expanded) document.getElementById("products")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
