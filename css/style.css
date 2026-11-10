@@ -289,3 +289,8 @@ img { max-width: 100%; }
   .product-enquiry { bottom: 10px; padding: 9px 16px; opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
   .product-image::after { opacity: 1; }
 }
+
+
+/* One enquiry action below the complete product grid */
+.catalogue-empty { margin-top: 28px; }
+.catalogue-empty[hidden] { display: none; }
