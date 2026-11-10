@@ -359,3 +359,17 @@ body.photo-viewer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .footer-bottom .developer-credit.is-visible .developer-credit-name { animation: none; }
 }
+
+
+/* Product gallery: show a compact preview, expand on demand. */
+.product-gallery-controls { display: flex; justify-content: center; margin-top: 25px; }
+.gallery-toggle { min-width: 220px; gap: 12px; border-color: #cbd9e7; color: var(--navy); background: #fff; }
+.gallery-toggle:hover { border-color: var(--blue); background: var(--pale); }
+.gallery-toggle span { font-size: 17px; line-height: 1; }
+.product-card[hidden] { display: none !important; }
+.gallery-card-revealed { animation: gallery-card-in .32s ease both; }
+@keyframes gallery-card-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .product-gallery-controls { margin-top: 19px; }
+  .gallery-toggle { width: 100%; }
+}
