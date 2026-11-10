@@ -322,3 +322,40 @@ body.photo-viewer-open { overflow: hidden; }
 /* Keep the contact phone number useful without another CTA button. */
 .contact-phone-link { display: inline-flex; align-items: center; color: #fff; font-size: 19px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
 .contact-phone-link:hover { color: #e2effb; }
+
+
+/* Developer credit: clear hierarchy with a restrained animated entrance. */
+.footer-bottom .developer-credit {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+.developer-credit-label {
+  color: #9eb1c5;
+  font-size: 10px;
+  letter-spacing: .045em;
+}
+.footer-bottom .developer-credit-name {
+  display: inline-block;
+  color: #fff;
+  font: 800 25px/1 "Manrope", sans-serif;
+  letter-spacing: .13em;
+  text-shadow: 0 0 18px rgba(91, 169, 238, .32);
+}
+.developer-credit-dot { color: #66b5ff; }
+.footer-bottom .developer-credit.is-visible .developer-credit-name {
+  animation: developer-credit-reveal .8s cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes developer-credit-reveal {
+  from { opacity: 0; transform: translateY(12px); letter-spacing: .24em; text-shadow: 0 0 0 rgba(91,169,238,0); }
+  to { opacity: 1; transform: translateY(0); letter-spacing: .13em; text-shadow: 0 0 18px rgba(91,169,238,.32); }
+}
+@media (max-width: 600px) {
+  .footer-bottom .developer-credit { align-items: flex-start; text-align: left; }
+  .footer-bottom .developer-credit-name { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-bottom .developer-credit.is-visible .developer-credit-name { animation: none; }
+}
