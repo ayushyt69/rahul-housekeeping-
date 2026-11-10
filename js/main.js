@@ -81,6 +81,19 @@
     menuToggle?.setAttribute("aria-expanded", "false");
     menuToggle?.setAttribute("aria-label", "Open navigation");
   }));
+  const developerCredit = document.querySelector(".developer-credit");
+  if (developerCredit && "IntersectionObserver" in window) {
+    const creditObserver = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        developerCredit.classList.add("is-visible");
+        creditObserver.disconnect();
+      }
+    }, { threshold: 0.35 });
+    creditObserver.observe(developerCredit);
+  } else {
+    developerCredit?.classList.add("is-visible");
+  }
+
   const year = document.getElementById("current-year");
   if (year) year.textContent = new Date().getFullYear();
 })();
