@@ -50,7 +50,7 @@ img { max-width: 100%; }
 .skip-link:focus { top: 10px; }
 
 .hero { position: relative; overflow: hidden; padding: 88px 0 82px; background: linear-gradient(112deg, #f4f8fc 0%, #fff 62%, #edf5fc 100%); }
-.hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 64px; position: relative; z-index: 1; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr); align-items: center; gap: 42px; position: relative; z-index: 1; }
 .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--blue-2); font-size: 10px; font-weight: 800; letter-spacing: .18em; }
 .eyebrow-line { display: inline-block; width: 26px; height: 2px; background: var(--orange); }
 .hero h1 { margin: 20px 0 18px; color: var(--navy); font: 800 clamp(42px, 5.2vw, 66px)/1.12 "Manrope", sans-serif; letter-spacing: -.055em; }
@@ -59,8 +59,8 @@ img { max-width: 100%; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 32px; color: #607286; font-size: 11px; font-weight: 600; }
 .meta-check { display: inline-grid; place-items: center; width: 16px; height: 16px; margin-right: 5px; border-radius: 50%; color: #fff; background: #3c9b78; font-size: 10px; }
-.hero-visual { min-height: 420px; position: relative; }
-.hero-image-main { position: absolute; inset: 8px 5px 12px 5px; width: auto; height: auto; border-radius: 12px; background: linear-gradient(0deg, rgba(10,39,68,.08), rgba(10,39,68,.02)), url("../assets/rahul-housekeeping-hero.jpg") center/cover; box-shadow: var(--shadow); }
+.hero-visual { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 0; }
+.hero-image-main { position: absolute; inset: 8px 5px 12px 5px; width: auto; height: auto; border-radius: 12px; background: url("../assets/rahul-housekeeping-hero.jpg") center/contain no-repeat; box-shadow: var(--shadow); }
 .hero-image-small { display: none; }
 .hero-stamp { position: absolute; top: 32px; left: 0; display: flex; flex-direction: column; padding: 17px 20px; border-radius: 7px; color: #fff; background: var(--orange); box-shadow: 0 12px 26px rgba(243,154,50,.25); transform: rotate(-4deg); }
 .hero-stamp strong { font: 800 19px "Manrope", sans-serif; }
@@ -193,7 +193,7 @@ img { max-width: 100%; }
   .primary-nav { gap: 13px; }
   .primary-nav a { font-size: 11px; }
   .header-call { padding: 0 14px; }
-  .hero-grid { gap: 30px; }
+  .hero-grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 24px; }
   .about-grid, .visit-grid { gap: 45px; }
   .catalogue-tools { align-items: flex-start; flex-direction: column; }
   .search-box { width: 100%; max-width: 360px; }
@@ -221,9 +221,9 @@ img { max-width: 100%; }
   .hero h1 { margin-top: 15px; font-size: clamp(40px, 11vw, 55px); }
   .hero-lead { font-size: 14px; }
   .hero-meta { gap: 10px 13px; margin-top: 23px; font-size: 10px; }
-  .hero-visual { min-height: 330px; margin: 0 4px; }
-  .hero-image-main { width: 78%; height: 285px; }
-  .hero-image-small { height: 140px; width: 43%; border-width: 7px; }
+  .hero-visual { width: 100%; min-height: 0; margin: 0; aspect-ratio: 16 / 9; }
+  .hero-image-main { inset: 0; width: auto; height: auto; }
+  .hero-image-small { display: none; }
   .hero-stamp { top: 20px; padding: 12px 14px; }
   .hero-stamp strong { font-size: 16px; }
   .hero-caption { right: -3px; bottom: 0; font-size: 9px; }
