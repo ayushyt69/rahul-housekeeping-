@@ -10,39 +10,45 @@
     other: { name: "Other Household Products", folder: "other-household-products" }
   };
 
-  async function getFolderImages(path) {
-    try {
-      const response = await fetch(
-        "https://api.github.com/repos/ayushyt69/rahul-housekeeping-/contents/" + path + "?ref=main",
-        { headers: { Accept: "application/vnd.github+json" }, cache: "no-store" }
-      );
-      if (!response.ok) throw new Error("Product photo folder unavailable: " + path);
-      const files = await response.json();
-      return files
-        .filter(file => {
-          if (file.type !== "file") return false;
-          const name = file.name.toLowerCase();
-          return name.endsWith(".jpg") || name.endsWith(".jpeg") ||
-            name.endsWith(".png") || name.endsWith(".webp") || name.endsWith(".gif");
-        })
-        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
-        .map(file => ({ name: file.name, src: file.download_url, folder: path }))
-        .filter(file => file.src);
-    } catch (error) {
-      console.warn("Could not load product photos from " + path, error);
-      return [];
-    }
+  // Load the entire product-images directory from GitHub in one request.
+  // This avoids making eight Contents API calls on every page visit.
+  async function getAllProductImages() {
+    const response = await fetch(
+      "https://api.github.com/repos/ayushyt69/rahul-housekeeping-/git/trees/main?recursive=1",
+      { headers: { Accept: "application/vnd.github+json" }, cache: "no-store" }
+    );
+    if (!response.ok) throw new Error("GitHub returned " + response.status);
+    const data = await response.json();
+    if (data.truncated) throw new Error("GitHub returned an incomplete file listing");
+
+    return data.tree
+      .filter(entry => {
+        if (entry.type !== "blob" || !entry.path.startsWith("product-images/")) return false;
+        const name = entry.path.toLowerCase();
+        return /\\.(jpg|jpeg|png|webp|gif)$/.test(name);
+      })
+      .map(entry => ({
+        name: entry.path.split("/").pop(),
+        path: entry.path,
+        src: "https://raw.githubusercontent.com/ayushyt69/rahul-housekeeping-/main/" +
+          entry.path.split("/").map(encodeURIComponent).join("/")
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
   }
 
-  const categoryImages = {};
-  await Promise.all(Object.entries(categories).map(async ([key, category]) => {
-    categoryImages[key] = await getFolderImages("product-images/" + category.folder);
-  }));
-
-  // Original root-level uploads remain visible in All Products.
-  // New uploads inside category folders appear in both All Products and their category.
-  const rootImages = await getFolderImages("product-images");
-  const allImages = [...rootImages, ...Object.values(categoryImages).flat()];
+  let allImages = [];
+  const categoryImages = Object.fromEntries(Object.keys(categories).map(key => [key, []]));
+  try {
+    allImages = await getAllProductImages();
+    allImages.forEach(image => {
+      const category = Object.entries(categories).find(([, value]) =>
+        image.path.startsWith("product-images/" + value.folder + "/")
+      );
+      if (category) categoryImages[category[0]].push(image);
+    });
+  } catch (error) {
+    console.error("Could not load the product catalogue", error);
+  }
 
   const grid = document.getElementById("catalogue-grid");
   const empty = document.getElementById("catalogue-empty");
