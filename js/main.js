@@ -3,13 +3,38 @@
   const images = Array.isArray(window.RAHUL_PRODUCTS) ? window.RAHUL_PRODUCTS : [];
   const grid = document.getElementById("product-grid");
 
+  const previewCount = 4;
+  const galleryToggle = document.getElementById("gallery-toggle");
+
   if (grid) {
     grid.innerHTML = images.map((src, index) => `
-      <article class="product-card">
+      <article class="product-card"${index >= previewCount ? " hidden" : ""}>
         <button class="product-image product-image-open" type="button" data-image-index="${index}" aria-label="View product photograph ${index + 1} in full size">
           <img src="${src}" alt="Rahul Housekeeping product ${index + 1}" loading="lazy">
         </button>
       </article>`).join("");
+  }
+
+  if (grid && galleryToggle && images.length > previewCount) {
+    galleryToggle.querySelector("span").textContent = "↓";
+    galleryToggle.firstChild.textContent = `View all ${images.length} product photos `;
+    galleryToggle.addEventListener("click", () => {
+      const expanded = galleryToggle.getAttribute("aria-expanded") === "true";
+      const cards = [...grid.querySelectorAll(".product-card")];
+      cards.forEach((card, index) => {
+        if (index >= previewCount) {
+          card.hidden = expanded;
+          if (!expanded) card.classList.add("gallery-card-revealed");
+          else card.classList.remove("gallery-card-revealed");
+        }
+      });
+      galleryToggle.setAttribute("aria-expanded", String(!expanded));
+      galleryToggle.firstChild.textContent = expanded ? `View all ${images.length} product photos ` : "Show fewer photos ";
+      galleryToggle.querySelector("span").textContent = expanded ? "↓" : "↑";
+      if (expanded) document.getElementById("products")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  } else if (galleryToggle) {
+    galleryToggle.hidden = true;
   }
 
   // Full-size, scrollable product photo viewer
