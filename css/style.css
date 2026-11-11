@@ -506,3 +506,11 @@ body.offers-open { overflow: hidden; }
   content: none !important;
   display: none !important;
 }
+
+
+/* Keep the mobile hero close to the navigation; only a slim top gap above offers. */
+@media (max-width: 760px) {
+  .hero.section {
+    padding-top: 12px;
+  }
+}
