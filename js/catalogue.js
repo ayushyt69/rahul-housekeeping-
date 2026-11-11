@@ -7,6 +7,8 @@
     furniture: { name: "Chairs & Furniture", folder: "chairs-furniture" },
     kitchen: { name: "Kitchen & Dining", folder: "kitchen-dining" },
     bathroom: { name: "Bathroom Accessories", folder: "bathroom-accessories" },
+    appliances: { name: "Home Appliances", folder: "home-appliances" },
+    planters: { name: "Planters & Gardening", folder: "planters-gardening" },
     other: { name: "Other Household Products", folder: "other-household-products" }
   };
 
