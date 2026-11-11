@@ -56,12 +56,27 @@
   const count = document.getElementById("catalogue-count");
   const buttons = [...document.querySelectorAll("[data-category]")];
   let visibleImages = [];
+  let activeCategory = "all";
+  const searchInput = document.getElementById("productSearch");
+  const noResults = document.getElementById("catalogue-no-results");
+  const allCount = document.getElementById("all-count");
 
-  function render(category) {
-    const selected = category === "all" ? allImages : (categoryImages[category] || []);
+  function render(category = activeCategory) {
+    activeCategory = category;
+    const source = category === "all" ? allImages : (categoryImages[category] || []);
+    const query = (searchInput?.value || "").trim().toLowerCase();
+    const selected = source.filter(image => {
+      if (!query) return true;
+      const folderCategory = Object.entries(categories).find(([, value]) =>
+        image.path.startsWith("product-images/" + value.folder + "/")
+      );
+      const categoryName = category === "all" ? (folderCategory?.[1].name || "") : (categories[category]?.name || "");
+      return (image.name + " " + categoryName).toLowerCase().includes(query);
+    });
     visibleImages = selected;
     title.textContent = category === "all" ? "All Products" : categories[category].name;
-    count.textContent = selected.length ? selected.length + " photos" : "";
+    count.textContent = selected.length + (selected.length === 1 ? " photo" : " photos");
+    if (allCount) allCount.textContent = allImages.length;
     grid.innerHTML = selected.map((image, index) =>
       '<article class="catalogue-product-card">' +
       '<button class="catalogue-product-open" type="button" data-image-index="' + index +
@@ -70,7 +85,9 @@
       (index + 1) + '" loading="lazy"></button></article>'
     ).join("");
 
-    empty.hidden = selected.length > 0;
+    const searchHasNoMatches = Boolean(query) && selected.length === 0;
+    noResults.hidden = !searchHasNoMatches;
+    empty.hidden = selected.length > 0 || searchHasNoMatches;
     const heading = empty.querySelector("h3");
     const message = empty.querySelector("p");
     if (category === "all" && !allImages.length) {
@@ -88,8 +105,10 @@
       item.classList.toggle("is-active", active);
       item.setAttribute("aria-pressed", String(active));
     });
+    if (searchInput) searchInput.value = "";
     render(button.dataset.category);
   }));
+  searchInput?.addEventListener("input", () => render());
 
   const viewer = document.createElement("div");
   viewer.className = "photo-viewer";
