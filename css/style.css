@@ -487,3 +487,22 @@ body.offers-open { overflow: hidden; }
   .visit-pro-actions { flex-direction:column; }
   .visit-pro-actions .button { width:100%; }
 }
+
+
+/* Simple, uniform developer credit: no glow, no uppercase, no separate styling. */
+.footer-bottom .developer-credit {
+  color: #9fc5e8 !important;
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  text-transform: none !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+.footer-bottom .developer-credit::before,
+.footer-bottom .developer-credit::after {
+  content: none !important;
+  display: none !important;
+}
