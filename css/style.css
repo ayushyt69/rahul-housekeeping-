@@ -140,18 +140,33 @@ img { max-width: 100%; }
 .about-points span { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-right: 7px; border-radius: 50%; color: #fff; background: #3b9b79; font-size: 10px; }
 
 .business-section { padding-top: 70px; padding-bottom: 78px; background: #f5f8fb; }
-.business-panel { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 12px; color: #fff; background: var(--navy); box-shadow: var(--shadow); }
-.business-copy { padding: 52px 48px; background: linear-gradient(145deg, #123d70, #174f88); }
-.business-copy h2 { max-width: 490px; margin: 14px 0 16px; font: 800 clamp(30px, 3.2vw, 42px)/1.15 "Manrope", sans-serif; letter-spacing: -.045em; }
+.business-panel { position: relative; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid #d5e2ef; border-radius: 18px; color: #fff; background: linear-gradient(135deg, #0d2c50 0%, #123d70 52%, #102b4b 100%); box-shadow: 0 22px 55px rgba(17,52,87,.16); }
+.business-panel::before, .business-panel::after { content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%; pointer-events: none; filter: blur(65px); opacity: .18; }
+.business-panel::before { top: -175px; left: -90px; background: #60a5fa; }
+.business-panel::after { right: -130px; bottom: -190px; background: #93c5fd; }
+.business-copy, .business-benefits { position: relative; z-index: 1; }
+.business-copy { padding: 52px 48px 42px; background: linear-gradient(145deg, rgba(18,61,112,.88), rgba(23,79,136,.72)); }
+.business-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid rgba(147,197,253,.28); border-radius: 999px; color: #c1ddf7; background: rgba(96,165,250,.09); font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.business-eyebrow > span { width: 7px; height: 7px; border-radius: 50%; background: #7db8f2; box-shadow: 0 0 0 4px rgba(125,184,242,.12); }
+.business-copy h2 { max-width: 490px; margin: 22px 0 17px; font: 800 clamp(30px, 3.2vw, 42px)/1.15 "Manrope", sans-serif; letter-spacing: -.045em; }
 .business-copy h2 span { color: #a9ccec; }
-.business-copy p { max-width: 480px; margin: 0 0 26px; color: #d0dfed; font-size: 14px; line-height: 1.85; }
-.business-benefits { display: flex; flex-direction: column; justify-content: center; padding: 35px 42px; background: #174879; }
-.business-benefit { display: flex; align-items: flex-start; gap: 17px; padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
-.business-number { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; color: #b9d8f2; font-size: 11px; font-weight: 800; }
-.business-benefit h3 { margin: 0 0 4px; color: #fff; font: 800 15px "Manrope", sans-serif; }
-.business-benefit p { margin: 0; color: #c3d5e7; font-size: 12px; line-height: 1.7; }
-.business-note { margin: 18px 0 0; color: #b9cde0; font-size: 11px; line-height: 1.6; }
-.eyebrow-light { color: #a9ccec; }
+.business-copy p { max-width: 480px; margin: 0 0 27px; color: #d0dfed; font-size: 14px; line-height: 1.85; }
+.business-cta { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 50px; padding: 0 19px; border: 1px solid rgba(255,255,255,.75); border-radius: 9px; color: #123d70; background: linear-gradient(110deg,#fff,#eaf3fc); box-shadow: 0 10px 24px rgba(0,0,0,.13); font-size: 12px; font-weight: 800; transition: transform .2s ease, box-shadow .2s ease; }
+.business-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.2); }
+.business-cta > span:last-child { color: #2563a6; font-size: 17px; }
+.business-highlights { display: flex; flex-wrap: wrap; gap: 12px 19px; margin-top: 27px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); color: #c7d9eb; font-size: 10px; font-weight: 700; }
+.business-highlights span { display: inline-flex; align-items: center; gap: 6px; }
+.business-highlights b { color: #9bc9f4; font-size: 14px; }
+.business-benefits { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 38px 38px; background: rgba(7,29,53,.22); }
+.business-benefit { display: flex; align-items: flex-start; gap: 15px; padding: 19px 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 13px; background: rgba(255,255,255,.045); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.business-benefit:hover { background: rgba(255,255,255,.075); border-color: rgba(147,197,253,.34); transform: translateY(-2px); }
+.business-number { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgba(147,197,253,.35); border-radius: 9px; color: #b9d8f2; background: rgba(96,165,250,.09); font-size: 11px; font-weight: 800; }
+.business-benefit > div { flex: 1; min-width: 0; }
+.business-benefit h3 { margin: 1px 0 5px; color: #fff; font: 800 14px "Manrope", sans-serif; }
+.business-benefit p { margin: 0; color: #c3d5e7; font-size: 11px; line-height: 1.7; }
+.business-arrow { color: #9bc9f4; font-size: 24px; line-height: 1; }
+.business-note { display: flex; align-items: flex-start; gap: 8px; margin: 3px 2px 0; color: #b9cde0; font-size: 10px; line-height: 1.65; }
+.business-note span { color: #9bc9f4; font-size: 13px; }
 
 .visit-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 75px; }
 .visit-copy h2 { margin-bottom: 14px; }
@@ -249,9 +264,11 @@ img { max-width: 100%; }
   .about-note { bottom: 33px; }
   .business-section { padding-top: 50px; padding-bottom: 55px; }
   .business-panel { grid-template-columns: 1fr; }
-  .business-copy { padding: 36px 26px; }
+  .business-copy { padding: 36px 26px 29px; }
   .business-copy h2 { font-size: 30px; }
-  .business-benefits { padding: 20px 26px 28px; }
+  .business-benefits { padding: 22px 20px 25px; }
+  .business-benefit { padding: 16px 13px; }
+  .business-highlights { gap: 10px 14px; }
   .map-card { min-height: 300px; }
   .contact-band { padding: 35px 0; }
   .contact-band-inner { align-items: flex-start; flex-direction: column; }
