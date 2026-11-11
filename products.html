@@ -7,10 +7,10 @@
   <title>Product Catalogue | Rahul Housekeeping</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=floating-offer-20261110">
-  <link rel="stylesheet" href="css/catalogue.css?v=catalogue-page-20261110">
-  <script src="js/catalogue.js?v=all-products-regex-fix-20261110" defer></script>
+  <link rel="stylesheet" href="css/catalogue.css?v=redesigned-catalogue-20261111">
+  <script src="js/catalogue.js?v=redesigned-search-catalogue-20261111" defer></script>
 </head>
 <body class="catalogue-page">
   <a class="skip-link" href="#catalogue-main">Skip to catalogue</a>
@@ -22,30 +22,20 @@
       <a href="index.html#home">Home</a><a class="active" href="products.html" aria-current="page">Products</a><a href="index.html#about">About Us</a><a href="index.html#business">For Businesses</a><a href="index.html#visit">Visit Us</a><a href="index.html#contact">Contact</a>
     </nav>
   </div></header>
-  <main id="catalogue-main">
-    <section class="catalogue-hero"><div class="container"><span class="eyebrow">RAHUL HOUSEKEEPING · DEOGHAR</span><h1>Product Catalogue</h1><p>Explore our range of household, plastic and cleaning products.</p></div></section>
-    <section class="catalogue-layout section"><div class="container">
-      <div class="catalogue-intro"><div><span class="eyebrow">BROWSE BY CATEGORY</span><h2>Find what you need.</h2></div><p>Product prices and availability can be confirmed by phone.</p></div>
-      <div class="catalogue-workspace">
-        <aside class="catalogue-sidebar" aria-label="Product categories"><h3>Categories</h3><div class="catalogue-category-list" id="catalogue-categories">
-          <button class="catalogue-category is-active" type="button" data-category="all" aria-pressed="true">All Products</button>
-          <button class="catalogue-category" type="button" data-category="cleaning" aria-pressed="false">Cleaning &amp; Housekeeping</button>
-          <button class="catalogue-category" type="button" data-category="plastic" aria-pressed="false">Plastic Household Items</button>
-          <button class="catalogue-category" type="button" data-category="storage" aria-pressed="false">Storage &amp; Organisation</button>
-          <button class="catalogue-category" type="button" data-category="furniture" aria-pressed="false">Chairs &amp; Furniture</button>
-          <button class="catalogue-category" type="button" data-category="kitchen" aria-pressed="false">Kitchen &amp; Dining</button>
-          <button class="catalogue-category" type="button" data-category="bathroom" aria-pressed="false">Bathroom Accessories</button>
-          <button class="catalogue-category" type="button" data-category="other" aria-pressed="false">Other Household Products</button>
-        </div><div class="catalogue-sidebar-note"><strong>Need help finding a product?</strong><span>Call us and tell us what you are looking for.</span><a href="tel:+918539994074">8539994074</a></div></aside>
-        <div class="catalogue-results"><div class="catalogue-results-heading"><div><span class="eyebrow">PRODUCT PHOTOS</span><h2 id="catalogue-current-title">All Products</h2></div><span class="catalogue-count" id="catalogue-count" aria-live="polite"></span></div>
-          <div class="catalogue-product-grid" id="catalogue-grid" aria-live="polite"></div>
-          <div class="catalogue-empty-state" id="catalogue-empty" hidden><span class="catalogue-empty-mark" aria-hidden="true">✦</span><h3>Photos coming soon</h3><p>Product photos for this category will be added here. Call us if you need help checking availability.</p><a class="button button-primary" href="tel:+918539994074">Call for Enquiry</a></div>
-          <p class="catalogue-photo-note">Product photographs are from the shop. Actual availability may vary.</p>
-        </div>
-      </div>
-      <div class="catalogue-callout"><div><span class="eyebrow eyebrow-light">HAVE A PRODUCT IN MIND?</span><h2>Call us for price and availability.</h2><p>For retail, wholesale and business enquiries.</p></div><a class="button button-light" href="tel:+918539994074">Call for Enquiry <span aria-hidden="true">↗</span></a></div>
-    </div></section>
-  </main>
+  <main id="catalogue-main" class="catalogue-main">
+<section class="catalogue-hero"><div class="container catalogue-hero-inner"><span class="catalogue-kicker">BROWSE CATALOGUE</span><h1>Find what you need.</h1><p>Explore household, plastic and cleaning products from Rahul Housekeeping.</p></div></section>
+<section class="catalogue-browser"><div class="container">
+<div class="catalogue-toolbar"><div><span class="catalogue-section-label">OUR PRODUCT RANGE</span><h2>Browse the collection</h2></div><label class="catalogue-search" for="productSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg><input id="productSearch" type="search" placeholder="Search products..." autocomplete="off"></label></div>
+<div class="catalogue-category-tray" id="catalogue-categories" aria-label="Filter products by category">
+<button class="catalogue-category is-active" type="button" data-category="all" aria-pressed="true">All Products <span class="category-count" id="all-count">—</span></button>
+<button class="catalogue-category" type="button" data-category="cleaning" aria-pressed="false">Cleaning &amp; Housekeeping</button><button class="catalogue-category" type="button" data-category="plastic" aria-pressed="false">Plastic Household Items</button><button class="catalogue-category" type="button" data-category="storage" aria-pressed="false">Storage &amp; Organisation</button><button class="catalogue-category" type="button" data-category="furniture" aria-pressed="false">Chairs &amp; Furniture</button><button class="catalogue-category" type="button" data-category="kitchen" aria-pressed="false">Kitchen &amp; Dining</button><button class="catalogue-category" type="button" data-category="bathroom" aria-pressed="false">Bathroom Accessories</button><button class="catalogue-category" type="button" data-category="other" aria-pressed="false">Other Household Products</button></div>
+<div class="catalogue-results-heading"><div><span class="catalogue-section-label">PRODUCT PHOTOS</span><h2 id="catalogue-current-title">All Products</h2></div><span class="catalogue-count" id="catalogue-count" aria-live="polite"></span></div>
+<div class="catalogue-product-grid" id="catalogue-grid" aria-live="polite"></div>
+<div class="catalogue-empty-state" id="catalogue-empty" hidden><span class="catalogue-empty-mark" aria-hidden="true">⌕</span><h3>Photos coming soon</h3><p>Product photos for this category will be added here. Call us if you need help checking availability.</p><a class="button button-primary" href="tel:+918539994074">Call for Enquiry</a></div>
+<div class="catalogue-no-results" id="catalogue-no-results" hidden><h3>No matching products found</h3><p>Try a different search term or choose another category.</p></div>
+<p class="catalogue-photo-note">Product photographs are from the shop. Actual availability may vary.</p>
+<div class="catalogue-callout"><div><span class="catalogue-callout-label">HAVE A PRODUCT IN MIND?</span><h2>Need prices or availability?</h2><p>Call Rahul Housekeeping for retail, wholesale and business enquiries.</p></div><a class="catalogue-call-button" href="tel:+918539994074">Call for Enquiry <span aria-hidden="true">↗</span></a></div>
+</div></section></main>
   <footer class="site-footer"><div class="container footer-main">
     <div class="footer-brand"><a class="brand brand-footer" href="index.html#home"><img src="assets/logo.svg" alt="" width="46" height="46"><span class="brand-copy"><strong>RAHUL</strong><small>HOUSEKEEPING</small></span></a><p>Household utility, plastic and cleaning products for homes and businesses in Deoghar.</p></div>
     <div class="footer-column"><strong>Explore</strong><a href="index.html#home">Home</a><a href="products.html">Products</a><a href="index.html#about">About Us</a><a href="index.html#business">For Businesses</a><a href="index.html#visit">Visit Us</a></div>
