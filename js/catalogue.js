@@ -123,11 +123,13 @@
     '<button class="photo-viewer-nav photo-viewer-prev" type="button" aria-label="Previous photograph">‹</button>' +
     '<div class="photo-viewer-content"><img class="photo-viewer-image" alt="Full-size product photograph"></div>' +
     '<button class="photo-viewer-nav photo-viewer-next" type="button" aria-label="Next photograph">›</button>' +
+    '<button class="photo-viewer-download" type="button" aria-label="Download this product photo"><span aria-hidden="true">↓</span> Download</button>' +
     '<p class="photo-viewer-count" aria-live="polite"></p>';
   document.body.appendChild(viewer);
 
   const fullImage = viewer.querySelector(".photo-viewer-image");
   const viewerCount = viewer.querySelector(".photo-viewer-count");
+  const downloadButton = viewer.querySelector(".photo-viewer-download");
   let currentIndex = 0;
   let returnFocus = null;
 
@@ -159,6 +161,34 @@
   viewer.querySelector(".photo-viewer-close").addEventListener("click", closeViewer);
   viewer.querySelector(".photo-viewer-prev").addEventListener("click", () => showPhoto(currentIndex - 1));
   viewer.querySelector(".photo-viewer-next").addEventListener("click", () => showPhoto(currentIndex + 1));
+  downloadButton.addEventListener("click", async () => {
+    const image = visibleImages[currentIndex];
+    if (!image) return;
+    const originalLabel = downloadButton.innerHTML;
+    downloadButton.disabled = true;
+    downloadButton.innerHTML = '<span aria-hidden="true">…</span> Preparing';
+    try {
+      const response = await fetch(image.src, { mode: "cors", cache: "force-cache" });
+      if (!response.ok) throw new Error("Image download failed");
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = image.name || "rahul-housekeeping-product";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+      downloadButton.innerHTML = '<span aria-hidden="true">✓</span> Downloaded';
+      setTimeout(() => { downloadButton.innerHTML = originalLabel; }, 1400);
+    } catch (error) {
+      window.open(image.src, "_blank", "noopener");
+      downloadButton.innerHTML = '<span aria-hidden="true">↗</span> Open image';
+      setTimeout(() => { downloadButton.innerHTML = originalLabel; }, 1800);
+    } finally {
+      downloadButton.disabled = false;
+    }
+  });
   viewer.addEventListener("click", event => { if (event.target === viewer) closeViewer(); });
   document.addEventListener("keydown", event => {
     if (viewer.hidden) return;
