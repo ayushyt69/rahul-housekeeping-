@@ -123,8 +123,9 @@
     '<button class="photo-viewer-nav photo-viewer-prev" type="button" aria-label="Previous photograph">‹</button>' +
     '<div class="photo-viewer-content"><img class="photo-viewer-image" alt="Full-size product photograph"></div>' +
     '<button class="photo-viewer-nav photo-viewer-next" type="button" aria-label="Next photograph">›</button>' +
+    '<div class="photo-viewer-actions">' +
     '<button class="photo-viewer-download" type="button" aria-label="Download this product photo"><span aria-hidden="true">↓</span> Download</button>' +
-    '<p class="photo-viewer-count" aria-live="polite"></p>';
+    '<p class="photo-viewer-count" aria-live="polite"></p></div>';
   document.body.appendChild(viewer);
 
   const fullImage = viewer.querySelector(".photo-viewer-image");
