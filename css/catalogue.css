@@ -177,3 +177,52 @@ body.catalogue-page .photo-viewer-count {
   .new-launches-section { margin-top: 29px; padding: 18px 13px; border-radius: 13px; }
   .new-launches-video-wrap { border-radius: 9px; }
 }
+
+
+/* Restore the blue, vertically centred image-navigation controls. */
+body.catalogue-page .photo-viewer-nav {
+  position: fixed !important;
+  z-index: 1220 !important;
+  top: 50% !important;
+  bottom: auto !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 52px !important;
+  height: 58px !important;
+  margin: 0 !important;
+  padding: 0 0 4px !important;
+  border: 1px solid rgba(191,219,254,.9) !important;
+  border-radius: 15px !important;
+  background: rgba(37,99,235,.94) !important;
+  color: #fff !important;
+  font: 500 38px/1 Arial,sans-serif !important;
+  text-align: center !important;
+  text-indent: 0 !important;
+  text-shadow: 0 1px 3px rgba(15,23,42,.25) !important;
+  box-shadow: 0 6px 22px rgba(37,99,235,.38), 0 0 18px rgba(59,130,246,.24) !important;
+  transform: translateY(-50%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  cursor: pointer !important;
+}
+body.catalogue-page .photo-viewer-prev { left: 18px !important; right: auto !important; }
+body.catalogue-page .photo-viewer-next { right: 18px !important; left: auto !important; }
+body.catalogue-page .photo-viewer-nav:hover,
+body.catalogue-page .photo-viewer-nav:focus-visible {
+  background: #1d4ed8 !important;
+  box-shadow: 0 0 0 3px rgba(96,165,250,.24), 0 0 28px rgba(59,130,246,.62) !important;
+  outline: none !important;
+}
+body.catalogue-page .photo-viewer-nav[hidden] { display: none !important; }
+@media(max-width:600px) {
+  body.catalogue-page .photo-viewer-nav {
+    top: 50% !important;
+    bottom: auto !important;
+    width: 43px !important;
+    height: 50px !important;
+    border-radius: 12px !important;
+    font-size: 33px !important;
+  }
+  body.catalogue-page .photo-viewer-prev { left: 9px !important; }
+  body.catalogue-page .photo-viewer-next { right: 9px !important; left: auto !important; }
+}
