@@ -31,55 +31,32 @@
 }
 
 
-/* Product viewer controls: navigation at mid-height, download row lifted from the bottom. */
-body.catalogue-page .photo-viewer-nav {
-  position: fixed !important;
-  top: 52% !important;
-  bottom: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 50px !important;
-  height: 58px !important;
-  padding: 0 !important;
-  border: 1px solid rgba(147,197,253,.72) !important;
-  border-radius: 14px !important;
-  background: rgba(30,64,175,.82) !important;
-  color: #fff !important;
-  font-family: Arial, sans-serif !important;
-  font-size: 38px !important;
-  font-weight: 400 !important;
-  line-height: 1 !important;
-  text-align: center !important;
-  transform: translateY(-50%) !important;
-  box-shadow: 0 0 0 1px rgba(59,130,246,.15), 0 0 18px rgba(37,99,235,.42) !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  cursor: pointer !important;
-  transition: background .18s ease, box-shadow .18s ease, border-color .18s ease !important;
-}
-body.catalogue-page .photo-viewer-nav:hover,
-body.catalogue-page .photo-viewer-nav:focus-visible {
-  background: #2563eb !important;
-  border-color: #bfdbfe !important;
-  box-shadow: 0 0 0 3px rgba(96,165,250,.2), 0 0 25px rgba(59,130,246,.72) !important;
-  outline: none !important;
-}
-body.catalogue-page .photo-viewer-prev { left: 16px !important; }
-body.catalogue-page .photo-viewer-next { right: 16px !important; }
-body.catalogue-page .photo-viewer-download {
+/* Product viewer controls: keep download and photo count in one non-overlapping row. */
+body.catalogue-page .photo-viewer-actions {
   position: fixed !important;
   z-index: 1210 !important;
-  left: calc(50% - 105px) !important;
+  left: 50% !important;
   right: auto !important;
   top: auto !important;
   bottom: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: max-content !important;
+  max-width: calc(100vw - 32px) !important;
+  transform: translateX(-50%) !important;
+}
+body.catalogue-page .photo-viewer-download {
+  position: static !important;
   display: inline-flex !important;
+  flex: 0 0 auto !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
   min-width: 132px !important;
   min-height: 46px !important;
+  margin: 0 !important;
   padding: 0 19px !important;
   border: 1px solid rgba(191,219,254,.85) !important;
   border-radius: 999px !important;
@@ -100,41 +77,25 @@ body.catalogue-page .photo-viewer-download:focus-visible {
 }
 body.catalogue-page .photo-viewer-download:disabled { opacity: .78 !important; cursor: wait !important; }
 body.catalogue-page .photo-viewer-count {
-  position: fixed !important;
-  z-index: 1210 !important;
-  left: calc(50% + 38px) !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: 38px !important;
+  position: static !important;
   display: flex !important;
+  flex: 0 0 auto !important;
   align-items: center !important;
   justify-content: center !important;
+  min-width: 54px !important;
   min-height: 46px !important;
   margin: 0 !important;
-  padding: 0 9px !important;
+  padding: 0 10px !important;
   border: 1px solid rgba(148,163,184,.35) !important;
   border-radius: 999px !important;
-  background: rgba(15,23,42,.78) !important;
+  background: rgba(15,23,42,.82) !important;
   color: #fff !important;
   font: 700 12px/1 "Plus Jakarta Sans",sans-serif !important;
   white-space: nowrap !important;
 }
 @media(max-width:600px) {
-  body.catalogue-page .photo-viewer { padding: 58px 12px 100px !important; }
-  body.catalogue-page .photo-viewer-nav {
-    top: 50% !important;
-    width: 42px !important;
-    height: 50px !important;
-    font-size: 34px !important;
-  }
-  body.catalogue-page .photo-viewer-prev { left: 8px !important; }
-  body.catalogue-page .photo-viewer-next { right: 8px !important; }
-  body.catalogue-page .photo-viewer-download {
-    left: calc(50% - 105px) !important;
-    bottom: 48px !important;
-  }
-  body.catalogue-page .photo-viewer-count {
-    left: calc(50% + 38px) !important;
-    bottom: 48px !important;
-  }
+  body.catalogue-page .photo-viewer { padding: 58px 12px 108px !important; }
+  body.catalogue-page .photo-viewer-actions { bottom: 48px !important; gap: 9px !important; max-width: calc(100vw - 24px) !important; }
+  body.catalogue-page .photo-viewer-download { min-width: 124px !important; min-height: 44px !important; padding: 0 14px !important; }
+  body.catalogue-page .photo-viewer-count { min-width: 50px !important; min-height: 44px !important; padding: 0 8px !important; }
 }
