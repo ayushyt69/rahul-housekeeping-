@@ -55,6 +55,27 @@
     if (event.key === "Escape") closeOffers();
   });
 
+  // Floating Ganesh Puja updates panel
+  const pujaTrigger = document.getElementById("puja-updates-trigger");
+  const pujaPanel = document.getElementById("puja-updates-panel");
+  const pujaClose = document.getElementById("puja-updates-close");
+
+  function setPujaPanel(open) {
+    if (!pujaTrigger || !pujaPanel) return;
+    pujaPanel.hidden = !open;
+    pujaTrigger.setAttribute("aria-expanded", String(open));
+    if (open) pujaClose?.focus();
+    else pujaTrigger.focus();
+  }
+
+  pujaTrigger?.addEventListener("click", () => {
+    setPujaPanel(pujaPanel.hidden);
+  });
+  pujaClose?.addEventListener("click", () => setPujaPanel(false));
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && pujaPanel && !pujaPanel.hidden) setPujaPanel(false);
+  });
+
   const menuToggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".primary-nav");
   menuToggle?.addEventListener("click", () => {
