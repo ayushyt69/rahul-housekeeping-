@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=floating-offer-20261110">
-  <link rel="stylesheet" href="css/catalogue.css?v=photo-viewer-download-20261112">
+  <link rel="stylesheet" href="css/catalogue.css?v=new-launches-section-20261112">
   <script src="js/catalogue.js?v=viewer-actions-row-20261112" defer></script>
 </head>
 <body class="catalogue-page">
@@ -29,10 +29,24 @@
 <div class="catalogue-category-tray" id="catalogue-categories" aria-label="Filter products by category">
 <button class="catalogue-category is-active" type="button" data-category="all" aria-pressed="true">All Products <span class="category-count" id="all-count">—</span></button>
 <button class="catalogue-category" type="button" data-category="cleaning" aria-pressed="false">Cleaning &amp; Housekeeping</button><button class="catalogue-category" type="button" data-category="plastic" aria-pressed="false">Plastic Household Items</button><button class="catalogue-category" type="button" data-category="storage" aria-pressed="false">Storage &amp; Organisation</button><button class="catalogue-category" type="button" data-category="furniture" aria-pressed="false">Chairs &amp; Furniture</button><button class="catalogue-category" type="button" data-category="kitchen" aria-pressed="false">Kitchen &amp; Dining</button><button class="catalogue-category" type="button" data-category="bathroom" aria-pressed="false">Bathroom Accessories</button><button class="catalogue-category" type="button" data-category="appliances" aria-pressed="false">Home Appliances</button><button class="catalogue-category" type="button" data-category="planters" aria-pressed="false">Planters &amp; Gardening</button><button class="catalogue-category" type="button" data-category="other" aria-pressed="false">Other Household Products</button></div>
+<a class="new-launches-link" href="#new-launches"><span class="new-launches-link-dot" aria-hidden="true"></span> Explore New Launches <span class="new-launches-link-arrow" aria-hidden="true">↘</span></a>
 <div class="catalogue-results-heading"><div><span class="catalogue-section-label">PRODUCT PHOTOS</span><h2 id="catalogue-current-title">All Products</h2></div><span class="catalogue-count" id="catalogue-count" aria-live="polite"></span></div>
 <div class="catalogue-product-grid" id="catalogue-grid" aria-live="polite"></div>
 <div class="catalogue-empty-state" id="catalogue-empty" hidden><span class="catalogue-empty-mark" aria-hidden="true">⌕</span><h3>Photos coming soon</h3><p>Product photos for this category will be added here. Call us if you need help checking availability.</p><a class="button button-primary" href="tel:+918539994074">Call for Enquiry</a></div>
 <div class="catalogue-no-results" id="catalogue-no-results" hidden><h3>No matching products found</h3><p>Try a different search term or choose another category.</p></div>
+<section class="new-launches-section" id="new-launches" aria-labelledby="new-launches-title">
+  <div class="new-launches-heading">
+    <span class="catalogue-section-label">BRAND FEATURED VIDEO</span>
+    <h2 id="new-launches-title">New Launches</h2>
+    <p>Watch a product video shared by the brand and explore its featured product.</p>
+  </div>
+  <div class="new-launches-video-wrap">
+    <video class="new-launches-video" controls playsinline preload="metadata">
+      <source src="https://raw.githubusercontent.com/ayushyt69/rahul-housekeeping-/main/product-images/VID-20250903-WA0005.mp4" type="video/mp4">
+      Your browser does not support embedded videos.
+    </video>
+  </div>
+</section>
 <p class="catalogue-photo-note">Product photographs are from the shop. Actual availability may vary.</p>
 <div class="catalogue-callout"><div><span class="catalogue-callout-label">HAVE A PRODUCT IN MIND?</span><h2>Need prices or availability?</h2><p>Call Rahul Housekeeping for retail, wholesale and business enquiries.</p></div><a class="catalogue-call-button" href="tel:+918539994074">Call for Enquiry <span aria-hidden="true">↗</span></a></div>
 </div></section></main>
