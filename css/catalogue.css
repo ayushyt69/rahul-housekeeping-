@@ -29,3 +29,60 @@
   content: none !important;
   display: none !important;
 }
+
+
+/* Keep image navigation controls visible and reachable on every screen size. */
+.catalogue-page .photo-viewer-nav {
+  top: 52%;
+  bottom: auto;
+  width: 48px;
+  height: 58px;
+  transform: translateY(-50%);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.catalogue-page .photo-viewer-prev { left: 16px; }
+.catalogue-page .photo-viewer-next { right: 16px; }
+.catalogue-page .photo-viewer-download {
+  position: absolute;
+  z-index: 4;
+  right: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 17px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  background: rgba(37,99,235,.96);
+  color: #fff;
+  font: 700 12px "Plus Jakarta Sans",sans-serif;
+  box-shadow: 0 6px 22px rgba(0,0,0,.28);
+  cursor: pointer;
+}
+.catalogue-page .photo-viewer-download:hover { background: #1d4ed8; }
+.catalogue-page .photo-viewer-download:disabled { opacity: .75; cursor: wait; }
+.catalogue-page .photo-viewer-count { bottom: 35px; }
+@media(max-width:600px) {
+  .catalogue-page .photo-viewer { padding: 58px 12px 78px; }
+  .catalogue-page .photo-viewer-nav {
+    top: 52%;
+    bottom: auto;
+    width: 44px;
+    height: 52px;
+    transform: translateY(-50%);
+  }
+  .catalogue-page .photo-viewer-prev { left: 10px; }
+  .catalogue-page .photo-viewer-next { right: 10px; }
+  .catalogue-page .photo-viewer-download {
+    right: 50%;
+    bottom: 18px;
+    min-height: 42px;
+    padding: 0 16px;
+    transform: translateX(50%);
+  }
+  .catalogue-page .photo-viewer-count { bottom: 68px; }
+}
