@@ -31,7 +31,7 @@
 }
 
 
-/* Product viewer controls: fixed, centred and always visible above the image. */
+/* Product viewer controls: navigation at mid-height, download row lifted from the bottom. */
 body.catalogue-page .photo-viewer-nav {
   position: fixed !important;
   top: 52% !important;
@@ -70,10 +70,10 @@ body.catalogue-page .photo-viewer-next { right: 16px !important; }
 body.catalogue-page .photo-viewer-download {
   position: fixed !important;
   z-index: 1210 !important;
-  left: 50% !important;
+  left: calc(50% - 105px) !important;
   right: auto !important;
   top: auto !important;
-  bottom: 22px !important;
+  bottom: 38px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -87,7 +87,7 @@ body.catalogue-page .photo-viewer-download {
   color: #fff !important;
   font: 800 13px/1 "Plus Jakarta Sans",sans-serif !important;
   box-shadow: 0 5px 22px rgba(37,99,235,.38), 0 0 18px rgba(59,130,246,.25) !important;
-  transform: translateX(-50%) !important;
+  transform: none !important;
   opacity: 1 !important;
   visibility: visible !important;
   cursor: pointer !important;
@@ -99,9 +99,28 @@ body.catalogue-page .photo-viewer-download:focus-visible {
   outline: none !important;
 }
 body.catalogue-page .photo-viewer-download:disabled { opacity: .78 !important; cursor: wait !important; }
-body.catalogue-page .photo-viewer-count { bottom: 82px !important; }
+body.catalogue-page .photo-viewer-count {
+  position: fixed !important;
+  z-index: 1210 !important;
+  left: calc(50% + 38px) !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 0 9px !important;
+  border: 1px solid rgba(148,163,184,.35) !important;
+  border-radius: 999px !important;
+  background: rgba(15,23,42,.78) !important;
+  color: #fff !important;
+  font: 700 12px/1 "Plus Jakarta Sans",sans-serif !important;
+  white-space: nowrap !important;
+}
 @media(max-width:600px) {
-  body.catalogue-page .photo-viewer { padding: 58px 12px 88px !important; }
+  body.catalogue-page .photo-viewer { padding: 58px 12px 100px !important; }
   body.catalogue-page .photo-viewer-nav {
     top: 50% !important;
     width: 42px !important;
@@ -110,6 +129,12 @@ body.catalogue-page .photo-viewer-count { bottom: 82px !important; }
   }
   body.catalogue-page .photo-viewer-prev { left: 8px !important; }
   body.catalogue-page .photo-viewer-next { right: 8px !important; }
-  body.catalogue-page .photo-viewer-download { bottom: 18px !important; }
-  body.catalogue-page .photo-viewer-count { bottom: 74px !important; }
+  body.catalogue-page .photo-viewer-download {
+    left: calc(50% - 105px) !important;
+    bottom: 48px !important;
+  }
+  body.catalogue-page .photo-viewer-count {
+    left: calc(50% + 38px) !important;
+    bottom: 48px !important;
+  }
 }
