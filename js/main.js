@@ -83,4 +83,125 @@
 
   const year = document.getElementById("current-year");
   if (year) year.textContent = new Date().getFullYear();
+
+  
+  // Private customer ratings: submissions are sent to the owner's Google Sheet.
+  const ratingsEndpoint = "https://script.google.com/macros/s/AKfycbx-8nWZxWp9sNuMFphZvLa2pF6n6qRVVWeSRumZRLg1eh1VcYDO6JISGUHIrTs_Tfu_/exec";
+  const ratingForm = document.getElementById("customer-rating-form");
+  const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
+  const ratingHint = document.getElementById("rating-selection-hint");
+  const ratingSubmit = document.getElementById("rating-submit");
+  const ratingStatus = document.getElementById("rating-form-status");
+  const ratingPrompt = document.getElementById("rating-prompt");
+  const ratingPromptClose = document.getElementById("rating-prompt-close");
+  const ratingPromptAction = document.getElementById("rating-prompt-action");
+  let selectedRating = 0;
+
+  const ratingLabels = ["", "Poor", "Fair", "Good", "Very good", "Excellent"];
+
+  function setRating(value) {
+    selectedRating = value;
+    ratingStars.forEach((star, index) => {
+      const active = index < value;
+      star.classList.toggle("is-active", active);
+      star.setAttribute("aria-pressed", String(Number(star.dataset.rating) === value));
+    });
+    if (ratingHint) ratingHint.textContent = ratingLabels[value] || "Tap a star to rate";
+    if (ratingSubmit) ratingSubmit.disabled = value === 0;
+  }
+
+  ratingStars.forEach(star => {
+    star.addEventListener("click", () => setRating(Number(star.dataset.rating)));
+    star.addEventListener("keydown", event => {
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        const next = Math.min(5, Math.max(1, Number(star.dataset.rating) + (event.key === "ArrowRight" ? 1 : -1)));
+        setRating(next);
+        ratingStars[next - 1]?.focus();
+      }
+    });
+  });
+
+  function hideRatingPrompt(permanent = true) {
+    if (ratingPrompt) ratingPrompt.hidden = true;
+    if (permanent) {
+      try { localStorage.setItem("rahulHousekeepingRatingPromptSeen", "1"); } catch (_) {}
+    }
+  }
+
+  function showRatingPrompt() {
+    if (!ratingPrompt) return;
+    try {
+      if (localStorage.getItem("rahulHousekeepingRatingPromptSeen") === "1" ||
+          localStorage.getItem("rahulHousekeepingRatingSubmitted") === "1") return;
+      localStorage.setItem("rahulHousekeepingRatingPromptSeen", "1");
+    } catch (_) {}
+    ratingPrompt.hidden = false;
+  }
+
+  ratingPromptClose?.addEventListener("click", () => hideRatingPrompt(true));
+  ratingPromptAction?.addEventListener("click", () => {
+    hideRatingPrompt(true);
+    document.getElementById("rate-experience")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  if (ratingPrompt) {
+    let promptTriggered = false;
+    const triggerPrompt = () => {
+      if (promptTriggered) return;
+      promptTriggered = true;
+      showRatingPrompt();
+      window.removeEventListener("scroll", onRatingScroll);
+    };
+    const onRatingScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable > 0 && window.scrollY / scrollable > 0.48) triggerPrompt();
+    };
+    window.addEventListener("scroll", onRatingScroll, { passive: true });
+    window.setTimeout(triggerPrompt, 35000);
+  }
+
+  ratingForm?.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!selectedRating || ratingSubmit?.disabled) return;
+
+    const review = document.getElementById("rating-review")?.value.trim() || "";
+    const website = ratingForm.querySelector('input[name="website"]')?.value || "";
+    ratingSubmit.disabled = true;
+    ratingSubmit.textContent = "Submitting...";
+    if (ratingStatus) {
+      ratingStatus.textContent = "";
+      ratingStatus.classList.remove("is-error");
+    }
+
+    try {
+      const body = new URLSearchParams({
+        rating: String(selectedRating),
+        review,
+        website
+      });
+
+      // Apps Script accepts this simple form-encoded POST without a CORS preflight.
+      // no-cors makes the response unreadable, but the browser still sends the submission.
+      await fetch(ratingsEndpoint, {
+        method: "POST",
+        mode: "no-cors",
+        body
+      });
+
+      if (ratingStatus) ratingStatus.textContent = "Thank you. Your feedback has been sent privately.";
+      ratingForm.reset();
+      setRating(0);
+      try { localStorage.setItem("rahulHousekeepingRatingSubmitted", "1"); } catch (_) {}
+      hideRatingPrompt(true);
+    } catch (error) {
+      if (ratingStatus) {
+        ratingStatus.textContent = "We couldn't send your feedback. Please try again.";
+        ratingStatus.classList.add("is-error");
+      }
+      ratingSubmit.disabled = false;
+      ratingSubmit.innerHTML = 'Submit Feedback <span aria-hidden="true">↗</span>';
+    }
+  });
+
 })();
