@@ -226,3 +226,24 @@ body.catalogue-page .photo-viewer-nav[hidden] { display: none !important; }
   body.catalogue-page .photo-viewer-prev { left: 9px !important; }
   body.catalogue-page .photo-viewer-next { right: 9px !important; left: auto !important; }
 }
+
+/* Desktop photo viewer: fit the complete product image inside the viewport. */
+@media (min-width:601px) {
+  body.catalogue-page .photo-viewer {
+    padding:68px 88px 112px !important;
+  }
+  body.catalogue-page .photo-viewer-content {
+    align-items:center !important;
+    justify-content:center !important;
+    overflow:hidden !important;
+  }
+  body.catalogue-page .photo-viewer-image {
+    display:block !important;
+    width:auto !important;
+    height:auto !important;
+    max-width:100% !important;
+    max-height:calc(100vh - 190px) !important;
+    object-fit:contain !important;
+    margin:auto !important;
+  }
+}
