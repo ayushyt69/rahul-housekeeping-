@@ -133,15 +133,60 @@
   const downloadButton = viewer.querySelector(".photo-viewer-download");
   let currentIndex = 0;
   let returnFocus = null;
+  let isPhotoLoading = false;
+  const previousButton = viewer.querySelector(".photo-viewer-prev");
+  const nextButton = viewer.querySelector(".photo-viewer-next");
+
+  // Keep adjacent full-size images ready so normal navigation feels immediate.
+  function preloadAdjacentPhotos(index) {
+    if (visibleImages.length < 2) return;
+    [index - 1, index + 1].forEach(position => {
+      const wrappedIndex = (position + visibleImages.length) % visibleImages.length;
+      const preload = new Image();
+      preload.src = visibleImages[wrappedIndex].src;
+    });
+  }
 
   function showPhoto(index) {
+    if (!visibleImages.length || isPhotoLoading) return;
+
     currentIndex = (index + visibleImages.length) % visibleImages.length;
-    fullImage.src = visibleImages[currentIndex].src;
+    const selectedImage = visibleImages[currentIndex];
+    isPhotoLoading = true;
+    previousButton.disabled = true;
+    nextButton.disabled = true;
+
+    fullImage.onload = () => {
+      isPhotoLoading = false;
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+      preloadAdjacentPhotos(currentIndex);
+    };
+    fullImage.onerror = () => {
+      isPhotoLoading = false;
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+    };
+
     fullImage.alt = "Rahul Housekeeping product photo " + (currentIndex + 1);
     viewerCount.textContent = (currentIndex + 1) + " / " + visibleImages.length;
-    viewer.querySelector(".photo-viewer-prev").hidden = visibleImages.length < 2;
-    viewer.querySelector(".photo-viewer-next").hidden = visibleImages.length < 2;
     viewer.querySelector(".photo-viewer-content").scrollTop = 0;
+
+    // Reuse an already-loaded image without waiting for another network request.
+    if (fullImage.src === selectedImage.src && fullImage.complete) {
+      isPhotoLoading = false;
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+      preloadAdjacentPhotos(currentIndex);
+      return;
+    }
+    fullImage.src = selectedImage.src;
+    if (fullImage.complete && fullImage.naturalWidth > 0) {
+      isPhotoLoading = false;
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+      preloadAdjacentPhotos(currentIndex);
+    }
   }
 
   function closeViewer() {
