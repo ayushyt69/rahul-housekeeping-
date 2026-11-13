@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=compact-mobile-hero-20261111">
-  <script src="js/main.js?v=main-catalogue-link-20261110" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=customer-ratings-20261113">
+  <script src="js/main.js?v=customer-ratings-20261113" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -235,6 +235,46 @@
       <img class="offers-banner" id="offers-banner" alt="Current offer from Rahul Housekeeping" hidden>
     </div>
   </div>
+
+
+  <section class="customer-rating-section" id="rate-experience" aria-labelledby="rating-title">
+    <div class="container">
+      <div class="customer-rating-panel">
+        <div class="rating-intro">
+          <span class="eyebrow">YOUR FEEDBACK MATTERS</span>
+          <h2 id="rating-title">Rate Your Experience</h2>
+          <p>Tell us how your experience was with Rahul Housekeeping. Your feedback is private and helps us improve.</p>
+          <span class="rating-privacy-note"><span aria-hidden="true">🔒</span> Your feedback is sent privately to our team.</span>
+        </div>
+        <form class="customer-rating-form" id="customer-rating-form">
+          <fieldset class="rating-stars-field">
+            <legend>Choose a rating <span aria-hidden="true">*</span></legend>
+            <div class="rating-stars" role="group" aria-label="Select a rating from 1 to 5 stars">
+              <button type="button" class="rating-star" data-rating="1" aria-label="1 star" aria-pressed="false">★</button>
+              <button type="button" class="rating-star" data-rating="2" aria-label="2 stars" aria-pressed="false">★</button>
+              <button type="button" class="rating-star" data-rating="3" aria-label="3 stars" aria-pressed="false">★</button>
+              <button type="button" class="rating-star" data-rating="4" aria-label="4 stars" aria-pressed="false">★</button>
+              <button type="button" class="rating-star" data-rating="5" aria-label="5 stars" aria-pressed="false">★</button>
+            </div>
+            <span class="rating-selection-hint" id="rating-selection-hint">Tap a star to rate</span>
+          </fieldset>
+          <label class="rating-review-label" for="rating-review">Your message <span>(optional)</span></label>
+          <textarea id="rating-review" name="review" rows="3" maxlength="500" placeholder="Share a little about your experience..."></textarea>
+          <label class="rating-honeypot" aria-hidden="true">Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          <button class="button button-primary rating-submit" id="rating-submit" type="submit" disabled>Submit Feedback <span aria-hidden="true">↗</span></button>
+          <p class="rating-form-status" id="rating-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <aside class="rating-prompt" id="rating-prompt" aria-label="Rate your experience" hidden>
+    <button class="rating-prompt-close" id="rating-prompt-close" type="button" aria-label="Dismiss rating prompt">×</button>
+    <span class="rating-prompt-kicker">A QUICK QUESTION</span>
+    <strong>Enjoyed your experience?</strong>
+    <p>Your feedback helps Rahul Housekeeping serve you better.</p>
+    <button class="rating-prompt-action" id="rating-prompt-action" type="button">Rate your experience <span aria-hidden="true">→</span></button>
+  </aside>
 
   <footer class="site-footer">
     <div class="container footer-main">
