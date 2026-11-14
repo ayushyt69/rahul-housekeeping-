@@ -1,0 +1,52 @@
+/* Chhath Puja first-visit greeting popup */
+.festival-wish-backdrop[hidden] { display: none !important; }
+.festival-wish-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(7, 24, 42, .48);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  animation: festival-backdrop-in .28s ease both;
+}
+.festival-wish-dialog {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(230px, .98fr);
+  width: min(760px, 100%);
+  max-height: min(88vh, 760px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 20px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 24px 80px rgba(4,20,38,.3);
+  animation: festival-dialog-in .38s cubic-bezier(.2,.75,.25,1) both;
+}
+.festival-wish-image { display: block; width: 100%; height: 100%; min-height: 360px; max-height: 620px; object-fit: cover; object-position: center; }
+.festival-wish-copy { align-self: center; padding: 42px 32px 34px; text-align: center; }
+.festival-wish-kicker { color: #b77922; font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.festival-wish-copy h2 { margin: 12px 0 10px; color: #123d70; font: 800 clamp(23px,3vw,34px)/1.2 "Manrope",sans-serif; }
+.festival-wish-copy p { margin: 0 auto 18px; max-width: 310px; color: #52677d; font-size: 14px; line-height: 1.7; }
+.festival-wish-copy strong { display: block; color: #1d5b9b; font-size: 13px; }
+.festival-wish-hint { display: block; margin-top: 27px; color: #8795a3; font-size: 10px; font-weight: 600; letter-spacing: .04em; }
+.festival-wish-close { position: absolute; z-index: 2; top: 11px; right: 11px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid rgba(18,61,112,.1); border-radius: 50%; color: #24415f; background: rgba(255,255,255,.9); font-size: 25px; line-height: 1; cursor: pointer; box-shadow: 0 3px 12px rgba(10,30,50,.1); }
+.festival-wish-close:hover { background: #fff; transform: scale(1.05); }
+body.festival-wish-open { overflow: hidden; }
+@keyframes festival-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes festival-dialog-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 620px) {
+  .festival-wish-backdrop { padding: 14px; }
+  .festival-wish-dialog { display: block; width: min(420px,100%); max-height: 88vh; overflow-y: auto; border-radius: 17px; }
+  .festival-wish-image { width: 100%; height: min(43vh,390px); min-height: 0; max-height: 390px; object-position: center 42%; }
+  .festival-wish-copy { padding: 21px 22px 23px; }
+  .festival-wish-copy h2 { margin: 8px 0; font-size: 25px; }
+  .festival-wish-copy p { margin-bottom: 12px; font-size: 12px; }
+  .festival-wish-hint { margin-top: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .festival-wish-backdrop, .festival-wish-dialog { animation: none; }
+  .festival-wish-close { transition: none; }
+}
