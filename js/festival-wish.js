@@ -2,6 +2,8 @@
 (() => {
   const modal = document.getElementById("festival-wish-modal");
   const close = document.getElementById("festival-wish-close");
+  const poster = modal?.querySelector(".festival-wish-image");
+  poster?.addEventListener("error", () => { poster.hidden = true; });
   if (!modal) return;
 
   const dismiss = () => {
